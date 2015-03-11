@@ -23,13 +23,18 @@
     "canvas-testbed": "^1.0.3",
     "clamp": "^1.0.1",
     "img": "^1.0.0",
+    "lerp": "^1.0.3",
+    "smoothstep": "^1.0.1",
     "tape": "^3.5.0",
+    "touch-position": "^1.0.3",
     "uglify-js": "^2.4.17",
+    "vectors": "^0.1.0",
     "watchify": "^2.4.0"
   },
   "scripts": {
     "build": "browserify demo/index.js -t babelify | uglifyjs -cm > demo/bundle.js",
-    "start": "budo demo/index.js -o demo/bundle.js --live -d -t babelify | garnish -v"
+    "start": "budo demo/index.js -o demo/bundle.js --live -d -t babelify | garnish -v",
+    "stress": "budo demo/stress.js -o demo/bundle-stress.js --live -d -t babelify | garnish -v"
   },
   "keywords": [
     "left",
