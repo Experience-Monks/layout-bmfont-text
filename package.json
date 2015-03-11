@@ -24,9 +24,11 @@
     "clamp": "^1.0.1",
     "img": "^1.0.0",
     "tape": "^3.5.0",
+    "uglify-js": "^2.4.17",
     "watchify": "^2.4.0"
   },
   "scripts": {
+    "build": "browserify demo/index.js -t babelify | uglifyjs -cm > demo/bundle.js",
     "start": "budo demo/index.js -o demo/bundle.js --live -d -t babelify | garnish -v"
   },
   "keywords": [
