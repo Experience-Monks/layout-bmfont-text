@@ -1,0 +1,58 @@
+{
+  "name": "layout-bmfont-text",
+  "version": "1.0.0",
+  "description": "word-wraps and lays out text glyphs",
+  "main": "index.js",
+  "license": "MIT",
+  "author": {
+    "name": "Matt DesLauriers",
+    "email": "dave.des@gmail.com",
+    "url": "https://github.com/mattdesl"
+  },
+  "dependencies": {
+    "as-number": "^1.0.0",
+    "indexof-property": "^1.1.1",
+    "word-wrapper": "^1.0.7",
+    "xtend": "^4.0.0"
+  },
+  "devDependencies": {
+    "babel": "^4.7.8",
+    "babelify": "^5.0.4",
+    "bmfont-lato": "^2.1.1",
+    "budo": "^1.2.2",
+    "canvas-testbed": "^1.0.3",
+    "clamp": "^1.0.1",
+    "img": "^1.0.0",
+    "tape": "^3.5.0",
+    "watchify": "^2.4.0"
+  },
+  "scripts": {
+    "start": "budo demo/index.js -o demo/bundle.js --live -d -t babelify | garnish -v"
+  },
+  "keywords": [
+    "left",
+    "to",
+    "right",
+    "left-to-right",
+    "LTR",
+    "text",
+    "layout",
+    "shape",
+    "shaping",
+    "shaper",
+    "glyphs",
+    "glyph",
+    "render",
+    "font",
+    "fonts",
+    "fillText"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Jam3/layout-bmfont-text.git"
+  },
+  "homepage": "https://github.com/Jam3/layout-bmfont-text",
+  "bugs": {
+    "url": "https://github.com/Jam3/layout-bmfont-text/issues"
+  }
+}
