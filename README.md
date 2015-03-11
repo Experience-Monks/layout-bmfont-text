@@ -4,7 +4,7 @@
 
 ![screenshot](http://i.imgur.com/fDIH2z9.png)
 
-[(click for demo)](https://mattdesl.github.io/layout-bmfont-text/demo)
+[(click for demo)](https://Jam3.github.io/layout-bmfont-text/demo)
 
 Provides layout and word-wrapping for left-to-right text, primarily aimed at bitmap font rendering in Canvas/WebGL. The input font should be in the format of BMFont json, see [here](https://github.com/mattdesl/bmfont2json). 
 
