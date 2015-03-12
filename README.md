@@ -32,7 +32,7 @@ console.log(layout.descender, layout.ascender)
 
 Features:
 
-- uses [word-wrapper](npmjs.com/package/word-wrapper) for layout
+- uses [word-wrapper](https://npmjs.com/package/word-wrapper) for layout
   - supports `"pre"` and `"nowrap"` modes (like CSS)
   - breaks on explicit newline characters `"\n"`
 - handles `"left"`, `"center"` and `"right"` alignments
