@@ -35,7 +35,7 @@ function render(context, width, height) {
   context.save()
 
   legend(context, padding + layout.width)
-  context.translate(padding, padding+layout.height)
+  context.translate(padding, padding + layout.height)
 
   context.globalAlpha = 0.5
   metrics(context)
