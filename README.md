@@ -6,28 +6,30 @@
 
 [(click for canvas demo)](https://Jam3.github.io/layout-bmfont-text/demo)
 
-Provides layout and word-wrapping for left-to-right text, primarily aimed at bitmap font rendering in Canvas/WebGL. The input font should be in the format of BMFont json, see [here](https://github.com/mattdesl/bmfont2json). 
+Provides layout and word-wrapping for left-to-right text, primarily aimed at bitmap font rendering in Canvas/WebGL. The input font should be in the format of BMFont json, see [here](https://github.com/Jam3/load-bmfont/blob/master/json-spec.md). 
 
-You can use [bmfont-lato](https://www.npmjs.com/package/bmfont-lato) for testing.
+You can use [bmfont-lato](https://www.npmjs.com/package/bmfont-lato) for testing, or [load-bmfont](https://www.npmjs.com/package/load-bmfont) for Node/Browser loading.
 
 ```js
 var createLayout = require('layout-bmfont-text')
-var font = require('bmfont-lato')
+var loadFont = require('load-bmfont')
 
-var layout = createLayout({
-  font: font,
-  text: 'Lorem ipsum dolor\nsit amet',
-  width: 300,
-  letterSpacing: 2,
-  align: 'center'
+loadFont('fonts/Arial.fnt', function(err, font) {
+  var layout = createLayout({
+    font: font,
+    text: 'Lorem ipsum dolor\nsit amet',
+    width: 300,
+    letterSpacing: 2,
+    align: 'center'
+  })
+
+  //for rendering
+  console.log(layout.glyphs)
+
+  //metrics
+  console.log(layout.width, layout.height)
+  console.log(layout.descender, layout.ascender)
 })
-
-//for rendering
-console.log(layout.glyphs)
-
-//metrics
-console.log(layout.width, layout.height)
-console.log(layout.descender, layout.ascender)
 ```
 
 Features:
