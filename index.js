@@ -3,8 +3,12 @@ var xtend = require('xtend')
 var findChar = require('indexof-property')('id')
 var number = require('as-number')
 
-var X_HEIGHTS = ['x', 'u', 'v', 'w', 'z']
+var X_HEIGHTS = ['x', 'e', 'a', 'o', 'n', 's', 'r', 'c', 'u', 'm', 'v', 'w', 'z']
 var M_WIDTHS = ['m', 'w']
+var CAP_HEIGHTS = ['M', 'N', 'B', 'D', 'C', 'E', 'F', 'K', 'A', 'G', 'H', 'I', 
+      'J', 'L', 'O', 'P', 'Q', 'R', 'S',
+      'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+
 
 var TAB_ID = '\t'.charCodeAt(0)
 var SPACE_ID = ' '.charCodeAt(0)
@@ -68,7 +72,9 @@ TextLayout.prototype.update = function(opt) {
   this._descender = font.common.lineHeight - baseline
   this._baseline = baseline
   this._xHeight = getXHeight(font)
-  this._ascender = lineHeight - descender - this._xHeight
+  this._capHeight = getCapHeight(font)
+  this._ascender = baseline - this._capHeight
+  // this._ascender = lineHeight - descender - this._xHeight
     
   //layout each glyph
   var self = this
@@ -204,6 +210,7 @@ TextLayout.prototype.computeMetrics = function(text, start, end, width) {
 ;['width', 'height', 
   'descender', 'ascender',
   'xHeight', 'baseline',
+  'capHeight',
   'lineHeight' ].forEach(addGetter)
 
 function addGetter(name) {
@@ -222,16 +229,6 @@ function wrapper(name) {
   ].join('\n')))()
 }
 
-function getXHeight(font) {
-  for (var i=0; i<X_HEIGHTS.length; i++) {
-    var id = X_HEIGHTS[i].charCodeAt(0)
-    var idx = findChar(font.chars, id)
-    if (idx >= 0) 
-      return font.chars[idx].height
-  }
-  return 0
-}
-
 function getGlyphById(font, id) {
   if (!font.chars || font.chars.length === 0)
     return null
@@ -242,12 +239,32 @@ function getGlyphById(font, id) {
   return null
 }
 
+function getXHeight(font) {
+  for (var i=0; i<X_HEIGHTS.length; i++) {
+    var id = X_HEIGHTS[i].charCodeAt(0)
+    var idx = findChar(font.chars, id)
+    if (idx >= 0) 
+      return font.chars[idx].height
+  }
+  return 0
+}
+
 function getMGlyph(font) {
   for (var i=0; i<M_WIDTHS.length; i++) {
     var id = M_WIDTHS[i].charCodeAt(0)
     var idx = findChar(font.chars, id)
     if (idx >= 0) 
       return font.chars[idx]
+  }
+  return 0
+}
+
+function getCapHeight(font) {
+  for (var i=0; i<CAP_HEIGHTS.length; i++) {
+    var id = CAP_HEIGHTS[i].charCodeAt(0)
+    var idx = findChar(font.chars, id)
+    if (idx >= 0) 
+      return font.chars[idx].height
   }
   return 0
 }

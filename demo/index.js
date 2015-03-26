@@ -3,11 +3,12 @@ const uri = require('bmfont-lato/image-uri')
 const loadImage = require('img')
 
 let padding = 20
-let text = `a quick brown fox
+let text = `a qUick Brown fox
 jumped over the lazy dogs and sphinx.
 
 kg\tyA - y. - y/ AW` //test kerning / tabs
 
+// text = 'one line some st'
 var layout = require('../')({
   font: font,
   text: text,
@@ -71,9 +72,13 @@ function metrics(context) {
   context.fillStyle = 'pink'
   context.fillRect(27, -layout.height, 36, layout.ascender)
 
+  //cap height
+  context.fillStyle = 'yellow'
+  context.fillRect(110, -layout.height + layout.ascender , 18, layout.capHeight)
+
   //baseline
   context.fillStyle = 'orange'
-  context.fillRect(120, -layout.height, 36, layout.baseline)
+  context.fillRect(140, -layout.height, 36, layout.baseline)
 
   //descender
   context.fillStyle = 'green'
@@ -91,7 +96,8 @@ function legend(context, x) {
     ['pink', 'ascender'],
     ['orange', 'baseline'],
     ['blue', 'x-height'],
-    ['green', 'descender']
+    ['green', 'descender'],
+    ['yellow', 'cap height']
   ].forEach((opt, i) => {
     var [ color, name ] = opt
     context.globalAlpha = 0.5
