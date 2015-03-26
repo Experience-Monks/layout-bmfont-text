@@ -6,7 +6,7 @@
 
 [(click for canvas demo)](https://Jam3.github.io/layout-bmfont-text/demo)
 
-Provides layout and word-wrapping for left-to-right text, primarily aimed at bitmap font rendering in Canvas/WebGL. The input font should be in the format of BMFont json, see [here](https://github.com/Jam3/load-bmfont/blob/master/json-spec.md). 
+Provides layout and word-wrapping for left-to-right Latin text, primarily aimed at bitmap font rendering in Canvas/WebGL. The input font should be in the format of BMFont json, see [here](https://github.com/Jam3/load-bmfont/blob/master/json-spec.md). 
 
 You can use [bmfont-lato](https://www.npmjs.com/package/bmfont-lato) for testing, or [load-bmfont](https://www.npmjs.com/package/load-bmfont) for Node/Browser loading.
 
@@ -98,7 +98,7 @@ The baseline metric: measures top of text layout to the baseline of the first li
 
 #### `layout.xHeight`
 
-The x-height metric; the height of a lowercase character. Uses the first available height of the following: 'x', 'u', 'v', 'w', 'z'. 
+The x-height metric; the height of a lowercase character. Uses the first available height of the common lowercase Latin "x-chars", such as 'x', 'u', 'v', 'w', 'z'. 
 
 #### `layout.descender`
 
@@ -107,6 +107,10 @@ The metric from baseline to the bottom of the descenders (like the bottom of a l
 #### `layout.ascender`
 
 The metric for ascenders; typically from the top of x-height to the top of the glyph height.
+
+#### `layout.capHeight`
+
+The cap height metric; the height of a flat uppercase letter like 'H' or 'I'. Uses the frist available height of common uppercase Latin flat capitals, such as 'H', 'I', 'E', 'T', 'K'.
 
 ## License
 

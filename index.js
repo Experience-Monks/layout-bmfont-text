@@ -5,9 +5,7 @@ var number = require('as-number')
 
 var X_HEIGHTS = ['x', 'e', 'a', 'o', 'n', 's', 'r', 'c', 'u', 'm', 'v', 'w', 'z']
 var M_WIDTHS = ['m', 'w']
-var CAP_HEIGHTS = ['M', 'N', 'B', 'D', 'C', 'E', 'F', 'K', 'A', 'G', 'H', 'I', 
-      'J', 'L', 'O', 'P', 'Q', 'R', 'S',
-      'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+var CAP_HEIGHTS = ['H', 'I', 'N', 'E', 'F', 'K', 'L', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
 
 var TAB_ID = '\t'.charCodeAt(0)
@@ -73,8 +71,7 @@ TextLayout.prototype.update = function(opt) {
   this._baseline = baseline
   this._xHeight = getXHeight(font)
   this._capHeight = getCapHeight(font)
-  this._ascender = baseline - this._capHeight
-  // this._ascender = lineHeight - descender - this._xHeight
+  this._ascender = lineHeight - descender - this._xHeight
     
   //layout each glyph
   var self = this

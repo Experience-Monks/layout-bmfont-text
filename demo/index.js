@@ -3,7 +3,7 @@ const uri = require('bmfont-lato/image-uri')
 const loadImage = require('img')
 
 let padding = 20
-let text = `a qUick Brown fox
+let text = `a quick Brown fox
 jumped over the lazy dogs and sphinx.
 
 kg\tyA - y. - y/ AW` //test kerning / tabs
@@ -74,7 +74,7 @@ function metrics(context) {
 
   //cap height
   context.fillStyle = 'yellow'
-  context.fillRect(110, -layout.height + layout.ascender , 18, layout.capHeight)
+  context.fillRect(110, -layout.height + layout.baseline , 18, -layout.capHeight)
 
   //baseline
   context.fillStyle = 'orange'
