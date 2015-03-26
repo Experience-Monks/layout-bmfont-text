@@ -71,6 +71,7 @@ TextLayout.prototype.update = function(opt) {
   this._baseline = baseline
   this._xHeight = getXHeight(font)
   this._capHeight = getCapHeight(font)
+  this._lineHeight = lineHeight
   this._ascender = lineHeight - descender - this._xHeight
     
   //layout each glyph

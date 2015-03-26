@@ -112,6 +112,10 @@ The metric for ascenders; typically from the top of x-height to the top of the g
 
 The cap height metric; the height of a flat uppercase letter like 'H' or 'I'. Uses the frist available height of common uppercase Latin flat capitals, such as 'H', 'I', 'E', 'T', 'K'.
 
+#### `layout.lineHeight`
+
+The line height; the height from one baseline to the next. This is what was passed as `opt.lineHeight`, or defaults to the `font.common.lineHeight`.
+
 ## License
 
 MIT, see [LICENSE.md](http://github.com/Jam3/layout-bmfont-text/blob/master/LICENSE.md) for details.

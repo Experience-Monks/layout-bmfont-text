@@ -84,6 +84,10 @@ function metrics(context) {
   context.fillStyle = 'green'
   context.fillRect(0, 0, 30, layout.descender)
 
+  //line height
+  context.fillStyle = 'red'
+  context.fillRect(0, -layout.height + layout.baseline, 52, layout.lineHeight)
+  
   //bounds
   context.strokeRect(0, 0, layout.width, -layout.height)
 }
@@ -97,7 +101,8 @@ function legend(context, x) {
     ['orange', 'baseline'],
     ['blue', 'x-height'],
     ['green', 'descender'],
-    ['yellow', 'cap height']
+    ['yellow', 'cap height'],
+    ['cyan', 'line height']
   ].forEach((opt, i) => {
     var [ color, name ] = opt
     context.globalAlpha = 0.5
