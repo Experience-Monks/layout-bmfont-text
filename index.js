@@ -53,7 +53,6 @@ TextLayout.prototype.update = function(opt) {
   //the pen position
   var x = 0
   var y = 0
-  var chars = font.chars
   var lineHeight = number(opt.lineHeight, font.common.lineHeight)
   var baseline = font.common.base
   var descender = lineHeight-baseline
@@ -76,7 +75,7 @@ TextLayout.prototype.update = function(opt) {
     
   //layout each glyph
   var self = this
-  lines.forEach(function(line) {
+  lines.forEach(function(line, lineIndex) {
     var start = line.start
     var end = line.end
     var lineWidth = line.width
@@ -99,7 +98,8 @@ TextLayout.prototype.update = function(opt) {
         glyphs.push({
           position: [tx, y],
           data: glyph,
-          index: i
+          index: i,
+          line: lineIndex
         })  
 
         //move pen forward
