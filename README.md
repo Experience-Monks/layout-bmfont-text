@@ -74,9 +74,10 @@ An array of laid out glyphs that can be used for rendering. Each glyph looks lik
 
 ```js
 {
-    index: i,        //the index of this glyph into the string
-    data: {...},     //the BMFont "char" object for this glyph
-    position: [x, y] //the baseline position to render this glyph
+    index: Number,    //the index of this glyph into the string
+    data: {...},      //the BMFont "char" object for this glyph
+    position: [x, y], //the baseline position to render this glyph
+    line: Number      //the line index this glyph appears in
 }
 ```
 

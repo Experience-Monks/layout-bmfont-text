@@ -52,5 +52,22 @@ test('should export API', function(t) {
     font: font
   })
   t.equal(layout.width, lineWidth + spacing, 'letter spacing matches')
+  
+  layout = createLayout({
+    text: 'hx\nab',
+    font: font
+  })
+  
+  t.deepEqual(layout.glyphs.map(function (x) {
+    return String.fromCharCode(x.data.id) 
+  }).join(''), 'hxab', 'provides glyphs')
+  
+  t.deepEqual(layout.glyphs.map(function (x) {
+    return x.line
+  }), [ 0, 0, 1, 1 ], 'provides lines')
+  
+  t.deepEqual(layout.glyphs.map(function (x) {
+    return x.index
+  }), [ 0, 1, 3, 4 ], 'provides indices')
   t.end()
 })
