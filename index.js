@@ -112,6 +112,7 @@ TextLayout.prototype.update = function(opt) {
     y += lineHeight
     x = 0
   })
+  this._linesTotal = lines.length;
 }
 
 TextLayout.prototype._setupSpaceGlyphs = function(font) {
