@@ -65,7 +65,7 @@ TextLayout.prototype.update = function(opt) {
   //the metrics for this text layout
   this._width = maxLineWidth
   this._height = height
-  this._descender = font.common.lineHeight - baseline
+  this._descender = lineHeight - baseline
   this._baseline = baseline
   this._xHeight = getXHeight(font)
   this._capHeight = getCapHeight(font)
