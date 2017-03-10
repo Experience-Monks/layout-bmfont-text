@@ -1,6 +1,5 @@
 var wordWrap = require('word-wrapper')
 var xtend = require('xtend')
-var findChar = require('indexof-property')('id')
 var number = require('as-number')
 
 var X_HEIGHTS = ['x', 'e', 'a', 'o', 'n', 's', 'r', 'c', 'u', 'm', 'v', 'w', 'z']
@@ -287,4 +286,14 @@ function getAlignType(align) {
   else if (align === 'right')
     return ALIGN_RIGHT
   return ALIGN_LEFT
+}
+
+function findChar (array, value, start) {
+  start = start || 0
+  for (var i = start; i < array.length; i++) {
+    if (array[i].id === value) {
+      return i
+    }
+  }
+  return -1
 }
