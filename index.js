@@ -11,7 +11,8 @@ var TAB_ID = '\t'.charCodeAt(0)
 var SPACE_ID = ' '.charCodeAt(0)
 var ALIGN_LEFT = 0, 
     ALIGN_CENTER = 1, 
-    ALIGN_RIGHT = 2
+    ALIGN_RIGHT = 2,
+    ALIGN_JUSTIFY = 3
 
 module.exports = function createLayout(opt) {
   return new TextLayout(opt)
@@ -79,6 +80,20 @@ TextLayout.prototype.update = function(opt) {
     var end = line.end
     var lineWidth = line.width
     var lastGlyph
+    var extraSpaceSpacing = 0
+
+    if (align === ALIGN_JUSTIFY) {
+      var spaceCount = 0
+      for (var j=start; j<end; j++) {
+        var id = text.charCodeAt(j)
+        if (id === SPACE_ID)
+          spaceCount++
+      }
+      var extraSpace = maxLineWidth - lineWidth
+
+      if (spaceCount && extraSpace / maxLineWidth < 0.3)
+        extraSpaceSpacing = extraSpace / spaceCount
+    }
     
     //for each glyph in that line...
     for (var i=start; i<end; i++) {
@@ -93,6 +108,8 @@ TextLayout.prototype.update = function(opt) {
           tx += (maxLineWidth-lineWidth)/2
         else if (align === ALIGN_RIGHT)
           tx += (maxLineWidth-lineWidth)
+        else if (align === ALIGN_JUSTIFY && id === SPACE_ID)
+          x += extraSpaceSpacing
 
         glyphs.push({
           position: [tx, y],
@@ -285,6 +302,8 @@ function getAlignType(align) {
     return ALIGN_CENTER
   else if (align === 'right')
     return ALIGN_RIGHT
+  else if (align === 'justify')
+    return ALIGN_JUSTIFY
   return ALIGN_LEFT
 }
 
