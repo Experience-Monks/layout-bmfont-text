@@ -37,7 +37,7 @@ Features:
 - uses [word-wrapper](https://npmjs.com/package/word-wrapper) for layout
   - supports `"pre"` and `"nowrap"` modes (like CSS)
   - breaks on explicit newline characters `"\n"`
-- handles `"left"`, `"center"` and `"right"` alignments
+- handles `"left"`, `"center"`, `"right"` and `"justify"` alignments
 - handles kerning, letter spacing, line height
 - handles space and tab widths
 - provides computed bounds of resulting text box
@@ -57,7 +57,7 @@ Creates a new layout with the given options.
 - `text` (string) the text to layout. Newline characters (`\n`) will cause line breaks
 - `width` (number, optional) the desired width of the text box, causes word-wrapping and clipping in `"pre"` mode. Leave as undefined to remove word-wrapping (default behaviour)
 - `mode` (string) a mode for [word-wrapper](https://www.npmjs.com/package/word-wrapper); can be 'pre' (maintain spacing), or 'nowrap' (collapse whitespace but only break on newline characters), otherwise assumes normal word-wrap behaviour (collapse whitespace, break at width or newlines)
-- `align` (string) can be `"left"`, `"center"` or `"right"` (default: left)
+- `align` (string) can be `"left"`, `"center"`, `"right"` or `"justify"` (default: left)
 - `letterSpacing` (number) the letter spacing in pixels (default: 0)
 - `lineHeight` (number) the line height in pixels (default to `font.common.lineHeight`)
 - `tabSize` (number) the number of spaces to use in a single tab (default 4)
