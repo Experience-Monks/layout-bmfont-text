@@ -213,18 +213,17 @@ TextLayout.prototype.computeMetrics = function(text, start, end, width) {
 
 function addGetter(name) {
   Object.defineProperty(TextLayout.prototype, name, {
-    get: wrapper(name),
+    // We return the private var in an anonymous getter function
+    // because the alternative is to have a scoped dynamic function name 
+    // and those need to use the Function constructor or the eval opperator
+    // and those are both unsecure and not accepted by safe websites
+    // with no unsafe-eval Content Security Policy
+    // See : https://developer.chrome.com/extensions/contentSecurityPolicy  
+    get: function () {
+      return this['_'+name]
+    },
     configurable: true
   })
-}
-
-//create lookups for private vars
-function wrapper(name) {
-  return (new Function([
-    'return function '+name+'() {',
-    '  return this._'+name,
-    '}'
-  ].join('\n')))()
 }
 
 function getGlyphById(font, id) {
