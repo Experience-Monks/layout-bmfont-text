@@ -57,6 +57,7 @@ Creates a new layout with the given options.
 - `text` (string) the text to layout. Newline characters (`\n`) will cause line breaks
 - `width` (number, optional) the desired width of the text box, causes word-wrapping and clipping in `"pre"` mode. Leave as undefined to remove word-wrapping (default behaviour)
 - `mode` (string) a mode for [word-wrapper](https://www.npmjs.com/package/word-wrapper); can be 'pre' (maintain spacing), or 'nowrap' (collapse whitespace but only break on newline characters), otherwise assumes normal word-wrap behaviour (collapse whitespace, break at width or newlines)
+- `wordBreak` (string) can be `"normal"`, `"break-all"`, `"keep-all"`, `"break-word"` (default: `break-all` for backwrad-compatability). Refer to [CSS word-break](https://developer.mozilla.org/en-US/docs/Web/CSS/word-break) prop for how this would work.
 - `align` (string) can be `"left"`, `"center"` or `"right"` (default: left)
 - `letterSpacing` (number) the letter spacing in pixels (default: 0)
 - `lineHeight` (number) the line height in pixels (default to `font.common.lineHeight`)

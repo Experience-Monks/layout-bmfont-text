@@ -69,5 +69,65 @@ test('should export API', function(t) {
   t.deepEqual(layout.glyphs.map(function (x) {
     return x.index
   }), [ 0, 1, 3, 4 ], 'provides indices')
+
+  // Test limited width and test wordBreak options
+  // Default behavior of wordBreak;
+  layout = createLayout({
+    text: 'hello\nworld',
+    font: font,
+    width: 50,
+  })
+  t.deepEqual(layout.glyphs.map(function (x) {
+    return x.line
+  }), [ 0, 0, 0, 1, 1, 2, 2, 3, 3, 3 ], 'breaks all words by default')
+
+  // wordBreak: break-all (also default behavior)
+  layout = createLayout({
+    text: 'hello\nworld',
+    font: font,
+    width: 50,
+    wordBreak: 'break-all',
+  })
+  t.deepEqual(layout.glyphs.map(function (x) {
+    return x.line
+  }), [ 0, 0, 0, 1, 1, 2, 2, 3, 3, 3 ], 'wordBreak: break-all')
+
+
+  // wordBreak: normal
+  layout = createLayout({
+    text: 'line1\nline2 thiswrapsbutstaysone',
+    font: font,
+    width: 50,
+    wordBreak: 'normal',
+  })
+  
+  t.deepEqual(layout.glyphs.map(function (x) {
+    return x.line
+  }), [ 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 ], 'wordBreak: normal')
+
+  // wordBreak: keep-all
+  layout = createLayout({
+    text: 'hello line1\nworld line2',
+    font: font,
+    width: 50,
+    wordBreak: 'keep-all',
+  })
+  
+  t.deepEqual(layout.glyphs.map(function (x) {
+    return x.line
+  }), [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ], 'wordBreak: keep-all')
+  
+    // wordBreak: break-word
+    layout = createLayout({
+      text: 'hel by a superlong',
+      font: font,
+      width: 50,
+      wordBreak: 'break-word',
+    })
+    
+    t.deepEqual(layout.glyphs.map(function (x) {
+      return x.line
+    }), [0, 0, 0, 1, 1, 2, 3, 3, 4, 4, 4, 5, 5, 5, 6 ], 'wordBreak: break-word')
+    
   t.end()
 })

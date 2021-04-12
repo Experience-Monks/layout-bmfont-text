@@ -158,7 +158,9 @@ TextLayout.prototype.computeMetrics = function(text, start, end, width) {
   var count = 0
   var glyph
   var lastGlyph
-
+  // Add an option to allow users to disable word clipping when
+  // wrapping. Not adding it by default for backward compatability.
+  var wordBreak = this._opt.wordBreak || 'break-all';
   if (!font.chars || font.chars.length === 0) {
     return {
       start: start,
@@ -167,8 +169,12 @@ TextLayout.prototype.computeMetrics = function(text, start, end, width) {
     }
   }
 
+  // If the container is too small, let at least one word bleed outside the edges.
+  var minWordsPerLine = 1;
+  var lineWordsCount = 0;
+  var glyphsInCurrentWord = 0;
   end = Math.min(text.length, end)
-  for (var i=start; i < end; i++) {
+  for (var i = start; i < end; i++) {
     var id = text.charCodeAt(i)
     var glyph = this.getGlyph(font, id)
 
@@ -180,16 +186,44 @@ TextLayout.prototype.computeMetrics = function(text, start, end, width) {
 
       var nextPen = curPen + glyph.xadvance + letterSpacing
       var nextWidth = curPen + glyph.width
-
-      //we've hit our limit; we can't move onto the next glyph
-      if (nextWidth >= width || nextPen >= width)
-        break
+      // We've hit the width limit. Check wordBreak option and decide what to do.
+      if ((nextWidth >= width || nextPen >= width)) {
+        // That's it. Break everything. Previous behavior befoer adding wordBreak.
+        // To keep backword compatability wordBreak defaults to 'break-all' if
+        // users don't pass it.
+        // See https://developer.mozilla.org/en-US/docs/Web/CSS/word-break for reference.
+        if (wordBreak === 'break-all') break;
+        else if (wordBreak === 'normal') {
+          if (lineWordsCount >= minWordsPerLine) {
+            count -= glyphsInCurrentWord;
+            break;
+          }
+        } 
+        else if (wordBreak === 'break-word') {
+          if (lineWordsCount > minWordsPerLine) {
+            // If we already have words in the line just go to a new line.
+            count -= glyphsInCurrentWord;
+          } else {
+            // If this is the first word in that line, then let's break it.
+            break;
+          }
+        } else if (wordBreak === 'keep-all') {
+          // Just never break.
+        }
+      }
 
       //otherwise continue along our line
       curPen = nextPen
       curWidth = nextWidth
       lastGlyph = glyph
     }
+    // If we're at an end of the word, reset current glyphs in word count.
+    if (id === SPACE_ID || id === TAB_ID) {
+      glyphsInCurrentWord = 0;
+      lineWordsCount++;
+    }
+    // Otherwise count it as part of the current word.
+    else glyphsInCurrentWord++;
     count++
   }
   
