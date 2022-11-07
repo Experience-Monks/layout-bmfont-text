@@ -202,30 +202,65 @@ TextLayout.prototype.computeMetrics = function(text, start, end, width) {
     end: start + count,
     width: curWidth
   }
-}
+};
 
-//getters for the private vars
-;['width', 'height', 
-  'descender', 'ascender',
-  'xHeight', 'baseline',
-  'capHeight',
-  'lineHeight' ].forEach(addGetter)
+// //getters for the private vars
+// ;['width', 'height', 
+//   'descender', 'ascender',
+//   'xHeight', 'baseline',
+//   'capHeight',
+//   'lineHeight' ].forEach(addGetter)
 
-function addGetter(name) {
-  Object.defineProperty(TextLayout.prototype, name, {
-    get: wrapper(name),
-    configurable: true
-  })
-}
+// function addGetter(name) {
+//   Object.defineProperty(TextLayout.prototype, name, {
+//     get: wrapper(name),
+//     configurable: true
+//   })
+// }
 
-//create lookups for private vars
-function wrapper(name) {
-  return (new Function([
-    'return function '+name+'() {',
-    '  return this._'+name,
-    '}'
-  ].join('\n')))()
-}
+// //create lookups for private vars
+// function wrapper(name) {
+//   return (new Function([
+//     'return function '+name+'() {',
+//     '  return this._'+name,
+//     '}'
+//   ].join('\n')))()
+// }
+
+// more tedious than the previous implementation, but compliant with
+// Content-Security-Policy
+Object.defineProperty(TextLayout.prototype, 'width', {
+  get: function() { return this._width },
+  configurable: true
+});
+Object.defineProperty(TextLayout.prototype, 'height', {
+  get: function() { return this._height },
+  configurable: true
+});
+Object.defineProperty(TextLayout.prototype, 'descender', {
+  get: function() { return this._descender },
+  configurable: true
+});
+Object.defineProperty(TextLayout.prototype, 'ascender', {
+  get: function() { return this._ascender },
+  configurable: true
+});
+Object.defineProperty(TextLayout.prototype, 'xHeight', {
+  get: function() { return this._xHeight },
+  configurable: true
+});
+Object.defineProperty(TextLayout.prototype, 'baseline', {
+  get: function() { return this._baseline },
+  configurable: true
+});
+Object.defineProperty(TextLayout.prototype, 'capHeight', {
+  get: function() { return this._capHeight },
+  configurable: true
+});
+Object.defineProperty(TextLayout.prototype, 'lineHeight', {
+  get: function() { return this._lineHeight },
+  configurable: true
+});
 
 function getGlyphById(font, id) {
   if (!font.chars || font.chars.length === 0)
