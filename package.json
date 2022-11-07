@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "as-number": "^1.0.0",
+    "configurable": "^0.0.1",
+    "load-bmfont": "^1.4.1",
     "word-wrapper": "^1.0.7",
     "xtend": "^4.0.0"
   },
@@ -24,7 +26,7 @@
     "img": "^1.0.0",
     "lerp": "^1.0.3",
     "smoothstep": "^1.0.1",
-    "tape": "^3.5.0",
+    "tape": "^3.6.1",
     "touch-position": "^1.0.3",
     "uglify-js": "^2.4.17",
     "vectors": "^0.1.0",
